@@ -6,21 +6,16 @@ public class StringSimilarityInspector {
         this.score = 0;
     }
 
-    public int checkLength(String guessString) {
-        assertIllegalArgument(guessString);
+    public int checkLength(String inputString) {
+        assertIllegalArgument(inputString);
 
-        double shortLength = answer.length();
-        double longLength = guessString.length();
-        if (answer.length() > guessString.length()) {
-            shortLength = guessString.length();
-            longLength = answer.length();
-        }
+        double shorter = Math.min(answer.length(), inputString.length());
+        double longer = Math.max(answer.length(), inputString.length());
 
-        if (shortLength == longLength) {
+        if (shorter == longer)
             score += 60;
-        } else if (longLength < shortLength * 2) {
-            score += (int) ((1-(longLength - shortLength)/shortLength) * 60);
-            System.out.println(shortLength);
+        else if (longer < shorter * 2) {
+            score += (shorter - (longer - shorter)) * 60 / shorter;
         }
 
         return score;
