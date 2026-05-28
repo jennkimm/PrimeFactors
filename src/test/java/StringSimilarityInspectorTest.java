@@ -19,13 +19,13 @@ public class StringSimilarityInspectorTest {
 
     @Test
     public void throwIllegalArgumentExceptionInvalidInput() {
-        assertIllegalArgument(null);
-        assertIllegalArgument("12");
+        assertIllegalArgument(null, "12");
+        assertIllegalArgument("12", null);
     }
 
-    private void assertIllegalArgument(String guessString) {
+    private void assertIllegalArgument(String inputString, String inputString2) {
         try {
-            inspector.checkLength(guessString);
+            inspector.checkLength(inputString, inputString2);
             fail();
         } catch (IllegalArgumentException e) {
 
@@ -34,23 +34,16 @@ public class StringSimilarityInspectorTest {
 
     @Test
     public void returnResultIfUnMatchedStringLength() {
-        generateString("ABC");
-        assertThat(inspector.checkLength("ABCDEF")).isEqualTo(0);
+        assertThat(inspector.checkLength("ABC","ABCDEF")).isEqualTo(0);
     }
 
     @Test
     public void returnResultIfMatchedStringLength() {
-        generateString("ABCED");
-        assertThat(inspector.checkLength("QQQQQ")).isEqualTo(60);
+        assertThat(inspector.checkLength("ABCED","QQQQQ")).isEqualTo(60);
     }
 
     @Test
     void returnResultIfPartiallyMatchedStringLength() {
-        generateString("ABC");
-        assertThat(inspector.checkLength("RE")).isEqualTo(30);
-    }
-
-    private void generateString(String s) {
-        inspector.answer = s;
+        assertThat(inspector.checkLength("ABC","RE")).isEqualTo(30);
     }
 }

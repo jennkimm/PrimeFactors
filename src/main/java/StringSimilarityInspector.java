@@ -1,16 +1,15 @@
 public class StringSimilarityInspector {
-    String answer;
     int score;
 
     public StringSimilarityInspector() {
         this.score = 0;
     }
 
-    public int checkLength(String inputString) {
+    public int checkLength(String inputString, String inputString2) {
         assertIllegalArgument(inputString);
 
-        double shorter = Math.min(answer.length(), inputString.length());
-        double longer = Math.max(answer.length(), inputString.length());
+        double shorter = Math.min(inputString2.length(), inputString.length());
+        double longer = Math.max(inputString2.length(), inputString.length());
 
         if (shorter == longer)
             score += 60;
