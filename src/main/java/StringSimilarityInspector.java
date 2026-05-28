@@ -1,4 +1,5 @@
 public class StringSimilarityInspector {
+    public static final int MAX_LENGTH_SCORE = 60;
     int score;
 
     public StringSimilarityInspector() {
@@ -12,9 +13,9 @@ public class StringSimilarityInspector {
         double longer = Math.max(inputString2.length(), inputString.length());
 
         if (shorter == longer)
-            score += 60;
+            score += MAX_LENGTH_SCORE;
         else if (longer < shorter * 2) {
-            score += (shorter - (longer - shorter)) * 60 / shorter;
+            score += (shorter - (longer - shorter)) * MAX_LENGTH_SCORE / shorter;
         }
 
         return score;
