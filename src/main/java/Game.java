@@ -6,7 +6,18 @@ public class Game {
         if (guessNumber.equals(question)) {
             return new GuessResult(true, 3, 0);
         } else {
-            return new GuessResult(false, 0, 0);
+            int strikes = 0;
+            int balls = 0;
+
+            for (int i = 0; i < 3; i++) {
+                if (guessNumber.charAt(i) == question.charAt(i)) {
+                    strikes++;
+                } else if (question.indexOf(guessNumber.charAt(i)) >= 0) {
+                    balls++;
+                }
+            }
+
+            return new GuessResult(strikes == 3, strikes, balls);
         }
     }
 

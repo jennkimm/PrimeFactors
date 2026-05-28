@@ -44,7 +44,41 @@ public class GameTest {
         generateQuestion("123");
         GuessResult result = game.guess("456");
         assertMatchedNumber(result, false, 0, 0);
+    }
 
+    @Test
+    public void returnSolvedResultIfOneBallNumber() {
+        generateQuestion("123");
+        GuessResult result = game.guess("416");
+        assertMatchedNumber(result, false, 0, 1);
+    }
+
+    @Test
+    public void returnSolvedResultIfTwoBallNumber() {
+        generateQuestion("123");
+        GuessResult result = game.guess("351");
+        assertMatchedNumber(result, false, 0, 2);
+    }
+
+    @Test
+    public void returnSolvedResultIfOneStrikeNumber() {
+        generateQuestion("123");
+        GuessResult result = game.guess("156");
+        assertMatchedNumber(result, false, 1, 0);
+    }
+
+    @Test
+    public void returnSolvedResultIfTwoStrikeNumber() {
+        generateQuestion("123");
+        GuessResult result = game.guess("126");
+        assertMatchedNumber(result, false, 2, 0);
+    }
+
+    @Test
+    public void returnSolvedResultIfOneStrikeOneBallNumber() {
+        generateQuestion("123");
+        GuessResult result = game.guess("136");
+        assertMatchedNumber(result, false, 1, 1);
     }
 
     private static void assertMatchedNumber(GuessResult result, boolean solved, int strikes, int balls) {
